@@ -15,6 +15,7 @@
                 <th scope="col"></th>
                 <th scope="col">Descrizione</th>
                 <th scope="col">Prezzo</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                     <td><img src="@pizza.immagine" class="img-fluid" alt="@pizza.nome" width="300"></td>
                     <td>@pizza.descrizione</td>
                     <td>@pizza.prezzo €</td>
+                    <td><a class="btn btn-primary" href="@Url.Action("ModificaPizza","Pizza", new{ID=pizza.Id})">Modifica Pizza</a></td>
                 </tr>
             }
         </tbody>

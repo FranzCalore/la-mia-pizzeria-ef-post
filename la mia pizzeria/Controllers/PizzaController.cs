@@ -23,8 +23,8 @@ namespace la_mia_pizzeria.Controllers
             {
                 Pizza pizza =
                     (from pi in db.Pizze
-                    where pi.Id == ID
-                    select pi).FirstOrDefault();
+                     where pi.Id == ID
+                     select pi).FirstOrDefault();
                 if (pizza != null)
                 {
                     return View(pizza);
@@ -33,7 +33,7 @@ namespace la_mia_pizzeria.Controllers
                 {
                     return NotFound("La pizza ricercata non è presente a listino");
                 }
-                
+
             }
         }
 
@@ -52,7 +52,7 @@ namespace la_mia_pizzeria.Controllers
                 return View("NuovaPizza", formData);
             }
 
-            using(PizzeriaContext db = new PizzeriaContext())
+            using (PizzeriaContext db = new PizzeriaContext())
             {
                 db.Pizze.Add(formData);
                 db.SaveChanges();
@@ -60,5 +60,55 @@ namespace la_mia_pizzeria.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult ModificaPizza(int ID)
+        {
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizza =
+                    (from pi in db.Pizze
+                     where pi.Id == ID
+                     select pi).FirstOrDefault();
+                if (pizza != null)
+                {
+                    return View("ModificaPizza", pizza);
+                }
+                else
+                {
+                    return NotFound("La pizza ricercata non è presente a listino");
+                }
+
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ModificaPizza(Pizza formData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ModificaPizza", formData);
+            }
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizzadamodificare = (from pi in db.Pizze
+                                           where pi.Id == formData.Id
+                                           select pi).FirstOrDefault();
+                if (pizzadamodificare != null)
+                {
+                    pizzadamodificare.nome = formData.nome;
+                    pizzadamodificare.descrizione = formData.descrizione;
+                    pizzadamodificare.immagine = formData.immagine;
+                    pizzadamodificare.prezzo = formData.prezzo;
+
+                    db.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
+
