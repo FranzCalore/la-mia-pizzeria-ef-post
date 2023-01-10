@@ -109,6 +109,25 @@ namespace la_mia_pizzeria.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult EliminaPizza(int ID)
+        {
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizzadaEliminare = (from pi in db.Pizze
+                                           where pi.Id == ID
+                                           select pi).FirstOrDefault();
+                if (pizzadaEliminare != null)
+                {
+                    db.Remove(pizzadaEliminare);
+
+                    db.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
 

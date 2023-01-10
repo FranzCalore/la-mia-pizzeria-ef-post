@@ -16,6 +16,7 @@
                 <th scope="col">Descrizione</th>
                 <th scope="col">Prezzo</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>@pizza.descrizione</td>
                     <td>@pizza.prezzo €</td>
                     <td><a class="btn btn-primary" href="@Url.Action("ModificaPizza","Pizza", new{ID=pizza.Id})">Modifica Pizza</a></td>
+                    <td><a class="btn btn-danger" href="@Url.Action("EliminaPizza","Pizza", new{ID=pizza.Id})">Elimina Pizza</a></td>
                 </tr>
             }
         </tbody>
