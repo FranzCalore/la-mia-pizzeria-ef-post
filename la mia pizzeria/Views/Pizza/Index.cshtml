@@ -1,0 +1,34 @@
+﻿@model List<Pizza>
+
+@if (Model.Count == 0)
+{
+    <h3>Non sono presenti pizze a listino, ci scusiamo per il disagio</h3>
+}
+
+<main class="container">
+    <h1>Il nostro olimpo</h1>
+    <table class="table table-hover my-5">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col"></th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Pizza pizza in Model)
+            {
+                <tr>
+                    <td>@pizza.Id</td>
+                    <td><a href="@Url.Action("Dettagli","Pizza",new{ID=pizza.Id})">@pizza.nome</a></td>
+                    <td><img src="@pizza.immagine" class="img-fluid" alt="@pizza.nome" width="300"></td>
+                    <td>@pizza.descrizione</td>
+                    <td>@pizza.prezzo €</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="@Url.Action("NuovaPizza","Pizza")">Aggiungi Pizza</a>
+</main>
