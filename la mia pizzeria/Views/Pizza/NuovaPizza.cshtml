@@ -1,24 +1,28 @@
 ﻿@model Pizza
 
 <div class="container">
-<form asp-controller="Pizza" asp-action="NuovaPizza">
-    @Html.AntiForgeryToken()
-    <div class="mb-3">
-        <label>Nome Pizza:</label>
-        <input asp-for="nome" type="text" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label>Descrizione Pizza:</label>
-        <textarea asp-for="descrizione" type="text" class="form-control"></textarea>
-    </div>
-    <div class="mb-3">
-        <label>Prezzo Pizza:</label>
-        <input asp-for="prezzo" type="text" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label>Immagine Pizza:</label>
-        <input asp-for="immagine" type="text" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <form asp-controller="Pizza" asp-action="NuovaPizza">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label>Nome Pizza:</label>
+            <input asp-for="nome" type="text" class="form-control">
+            <span asp-validation-for="nome" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Descrizione Pizza:</label>
+            <textarea asp-for="descrizione" type="text" class="form-control"></textarea>
+            <span asp-validation-for="descrizione" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Prezzo Pizza:</label>
+            <input asp-for="prezzo" type="number" class="form-control">
+            <span asp-validation-for="prezzo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Immagine Pizza:</label>
+            <input asp-for="immagine" type="text" class="form-control">
+            <span asp-validation-for="immagine" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
